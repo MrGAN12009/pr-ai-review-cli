@@ -23,6 +23,22 @@ python note_cli.py clear
 
 By default, notes are stored in `.notes.json`.
 
+You can also use a separate notes file for experiments:
+
+```bash
+python note_cli.py --store demo-notes.json add "Open a pull request"
+python note_cli.py --store demo-notes.json list
+```
+
+## Quick Review Checklist
+
+Before opening a pull request, check:
+
+- the command still runs;
+- the diff contains only lesson-related changes;
+- the PR title says what changed;
+- the PR description explains how to test the change.
+
 ## Lesson Flow
 
 This repository is prepared for a lesson about:
@@ -43,4 +59,3 @@ Two extra branches are pushed without pull requests so they can be used during a
 
 - `lesson/add-note-count`
 - `lesson/add-export-command`
-
