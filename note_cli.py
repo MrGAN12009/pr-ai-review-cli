@@ -2,14 +2,11 @@ import argparse
 import json
 from pathlib import Path
 
-
 DEFAULT_STORE = Path(".notes.json")
-
 
 def load_notes(path):
     if not path.exists():
         return []
-
     with path.open("r", encoding="utf-8") as file:
         return json.load(file)
 
@@ -46,11 +43,9 @@ def find_notes(path, query):
         for index, note in enumerate(notes, start=1)
         if query in note["text"].lower()
     ]
-
     if not matches:
         print("No matching notes.")
         return
-
     for index, note in matches:
         print(f"{index}. {note['text']}")
 
@@ -62,11 +57,7 @@ def clear_notes(path):
 
 def build_parser():
     parser = argparse.ArgumentParser(description="A tiny CLI notes app.")
-    parser.add_argument(
-        "--store",
-        type=Path,
-        default=DEFAULT_STORE,
-        help="Path to the JSON notes file.",
+    parser.add_argument("--store",type=Path,default=DEFAULT_STORE,     help="Path to the JSON notes file.",
     )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
