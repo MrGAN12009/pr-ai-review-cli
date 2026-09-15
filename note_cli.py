@@ -43,6 +43,11 @@ def clear_notes(path):
     print("All notes cleared.")
 
 
+def count_notes(path):
+    notes = load_notes(path)
+    print(f"Total notes: {len(notes)}")
+
+
 def build_parser():
     parser = argparse.ArgumentParser(description="A tiny CLI notes app.")
     parser.add_argument(
@@ -58,6 +63,7 @@ def build_parser():
     add_parser.add_argument("text", help="Text of the note.")
 
     subparsers.add_parser("list", help="List notes.")
+    subparsers.add_parser("count", help="Count saved notes.")
     subparsers.add_parser("clear", help="Clear all notes.")
 
     return parser
@@ -71,10 +77,11 @@ def main():
         add_note(args.store, args.text)
     elif args.command == "list":
         list_notes(args.store)
+    elif args.command == "count":
+        count_notes(args.store)
     elif args.command == "clear":
         clear_notes(args.store)
 
 
 if __name__ == "__main__":
     main()
-
