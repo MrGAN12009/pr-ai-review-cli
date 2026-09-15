@@ -59,3 +59,6 @@ Two extra branches are pushed without pull requests so they can be used during a
 
 - `lesson/add-note-count`
 - `lesson/add-export-command`
+
+
+Этот проект является учебным и не подлежит использованию!
