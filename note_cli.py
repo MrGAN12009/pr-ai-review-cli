@@ -43,6 +43,20 @@ def clear_notes(path):
     print("All notes cleared.")
 
 
+def export_notes(path, output):
+    notes = load_notes(path)
+    lines = ["# Notes", ""]
+
+    if notes:
+        for index, note in enumerate(notes, start=1):
+            lines.append(f"{index}. {note['text']}")
+    else:
+        lines.append("No notes yet.")
+
+    output.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"Exported notes to {output}")
+
+
 def build_parser():
     parser = argparse.ArgumentParser(description="A tiny CLI notes app.")
     parser.add_argument(
@@ -57,6 +71,9 @@ def build_parser():
     add_parser = subparsers.add_parser("add", help="Add a new note.")
     add_parser.add_argument("text", help="Text of the note.")
 
+    export_parser = subparsers.add_parser("export", help="Export notes to Markdown.")
+    export_parser.add_argument("output", type=Path, help="Markdown output path.")
+
     subparsers.add_parser("list", help="List notes.")
     subparsers.add_parser("clear", help="Clear all notes.")
 
@@ -69,6 +86,8 @@ def main():
 
     if args.command == "add":
         add_note(args.store, args.text)
+    elif args.command == "export":
+        export_notes(args.store, args.output)
     elif args.command == "list":
         list_notes(args.store)
     elif args.command == "clear":
@@ -77,4 +96,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
